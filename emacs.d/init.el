@@ -69,8 +69,13 @@ by Prelude.")
   "This directory houses packages that are not yet available in ELPA (or MELPA).")
 (defvar prelude-savefile-dir (expand-file-name "savefile" prelude-dir)
   "This folder stores all the automatically generated save/history-files.")
-(defvar prelude-modules-file (expand-file-name "prelude-modules.el" prelude-dir)
-  "This files contains a list of modules that will be loaded by Prelude.")
+(defvar prelude-modules-file (expand-file-name "prelude-modules.el" prelude-personal-dir)
+  "This file contains a list of modules that will be loaded by Prelude.")
+(defvar prelude-deprecated-modules-file
+  (expand-file-name "prelude-modules.el" prelude-dir)
+  (format "This file may contain a list of Prelude modules.
+
+This is DEPRECATED, use %s instead." prelude-modules-file))
 
 (unless (file-exists-p prelude-savefile-dir)
   (make-directory prelude-savefile-dir))
@@ -88,20 +93,7 @@ by Prelude.")
 (add-to-list 'load-path prelude-core-dir)
 (add-to-list 'load-path prelude-modules-dir)
 (add-to-list 'load-path prelude-vendor-dir)
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (prelude-add-subfolders-to-load-path prelude-vendor-dir)
-(add-hook 'emacs-startup-hook
-  (lambda ()
-    (load-theme 'hemisu-dark)
-    ))
-
-;; global variables
-(setq
- create-lockfiles nil
- make-backup-files nil)
-
-;; Turn on line number gutters
-(global-linum-mode t)
 
 ;; reduce the frequency of garbage collection by making it happen on
 ;; each 50MB of allocated data (the default is on every 0.76MB)
@@ -130,13 +122,26 @@ by Prelude.")
 (when (eq system-type 'darwin)
   (require 'prelude-macos))
 
+;; Linux specific settings
+(when (eq system-type 'gnu/linux)
+  (require 'prelude-linux))
+
 (message "Loading Prelude's modules...")
 
 ;; the modules
 (if (file-exists-p prelude-modules-file)
-    (load prelude-modules-file)
-  (message "Missing modules file %s" prelude-modules-file)
-  (message "You can get started by copying the bundled example file from sample/prelude-modules.el"))
+    (progn
+      (load prelude-modules-file)
+      (if (file-exists-p prelude-deprecated-modules-file)
+          (message "Loading new modules configuration, ignoring DEPRECATED prelude-module.el")))
+  (if (file-exists-p prelude-deprecated-modules-file)
+      (progn
+        (load prelude-deprecated-modules-file)
+        (message (format "The use of %s is DEPRECATED! Use %s instead!"
+                         prelude-deprecated-modules-file
+                         prelude-modules-file)))
+    (message "Missing modules file %s" prelude-modules-file)
+    (message "You can get started by copying the bundled example file from sample/prelude-modules.el")))
 
 ;; config changes made through the customize UI will be stored here
 (setq custom-file (expand-file-name "custom.el" prelude-personal-dir))
@@ -144,7 +149,9 @@ by Prelude.")
 ;; load the personal settings (this includes `custom-file')
 (when (file-exists-p prelude-personal-dir)
   (message "Loading personal configuration files in %s..." prelude-personal-dir)
-  (mapc 'load (directory-files prelude-personal-dir 't "^[^#\.].*el$")))
+  (mapc 'load (delete
+               prelude-modules-file
+               (directory-files prelude-personal-dir 't "^[^#\.].*\\.el$"))))
 
 (message "Prelude is ready to do thy bidding, Master %s!" current-user)
 
@@ -159,48 +166,3 @@ by Prelude.")
  (run-at-time 5 nil 'prelude-tip-of-the-day))
 
 ;;; init.el ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default bold shadow italic underline bold bold-italic bold])
- '(ansi-color-names-vector
-   (vector "#eaeaea" "#d54e53" "DarkOliveGreen3" "#e7c547" "DeepSkyBlue1" "#c397d8" "#70c0b1" "#181a26"))
- '(company-quickhelp-color-background "#4F4F4F")
- '(company-quickhelp-color-foreground "#DCDCCC")
- '(custom-enabled-themes (quote (flatland-black)))
- '(fci-rule-color "#14151E")
- '(nrepl-message-colors
-   (quote
-    ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
- '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
- '(vc-annotate-background nil)
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#d54e53")
-     (40 . "goldenrod")
-     (60 . "#e7c547")
-     (80 . "DarkOliveGreen3")
-     (100 . "#70c0b1")
-     (120 . "DeepSkyBlue1")
-     (140 . "#c397d8")
-     (160 . "#d54e53")
-     (180 . "goldenrod")
-     (200 . "#e7c547")
-     (220 . "DarkOliveGreen3")
-     (240 . "#70c0b1")
-     (260 . "DeepSkyBlue1")
-     (280 . "#c397d8")
-     (300 . "#d54e53")
-     (320 . "goldenrod")
-     (340 . "#e7c547")
-     (360 . "DarkOliveGreen3"))))
- '(vc-annotate-very-old-color nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

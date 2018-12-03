@@ -114,12 +114,6 @@
 (global-set-key (kbd "s-w") 'ace-window)
 (global-set-key [remap other-window] 'ace-window)
 
-;; multiple-cursors
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-
 (provide 'prelude-global-keybindings)
 
 ;;; prelude-global-keybindings.el ends here
