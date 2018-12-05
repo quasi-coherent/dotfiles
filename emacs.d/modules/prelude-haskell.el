@@ -48,6 +48,9 @@
   (add-hook 'haskell-mode-hook (lambda ()
                                  (run-hooks 'prelude-haskell-mode-hook))))
 
+(custom-set-variables
+ '(haskell-stylish-on-save t))
+
 (provide 'prelude-haskell)
 
 ;;; prelude-haskell.el ends here
