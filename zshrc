@@ -101,13 +101,11 @@ source $HOME/.zshenv
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias emacs="open /usr/local/Cellar/emacs/26.1_1/Emacs.app/"
+
 #############
 # Functions #
 #############
-
-alias emacs="open /usr/local/Cellar/emacs/26.1_1/Emacs.app/"
-
-eval "$(thefuck --alias)"
 
 extract () {
   if [ -f $1 ] ; then

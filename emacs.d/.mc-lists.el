@@ -3,9 +3,14 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        haskell-indentation-common-electric-command
         ))
 
 (setq mc/cmds-to-run-once
       '(
+        ace-window
         beginning-of-buffer
+        end-of-buffer
+        haskell-indentation-newline-and-indent
+        xref-pop-marker-stack
         ))
