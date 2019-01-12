@@ -10,7 +10,8 @@
 ;; global variables
 (setq
  create-lockfiles nil
- make-backup-files nil)
+ make-backup-files nil
+ whitespace-line-column 100)
 
 ;; Turn on line number gutters
 (global-linum-mode t)
