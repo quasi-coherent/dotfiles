@@ -5,6 +5,8 @@
       '(
         crux-move-beginning-of-line
         haskell-indentation-common-electric-command
+        suspend-frame
+        yaml-electric-backspace
         ))
 
 (setq mc/cmds-to-run-once
@@ -13,5 +15,6 @@
         beginning-of-buffer
         end-of-buffer
         haskell-indentation-newline-and-indent
+        indent-for-tab-command
         xref-pop-marker-stack
         ))

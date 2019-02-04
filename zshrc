@@ -101,7 +101,7 @@ source $HOME/.zshenv
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias emacs="open /usr/local/Cellar/emacs/26.1_1/Emacs.app/"
+alias emacs="emacs -nw"
 
 #############
 # Functions #
