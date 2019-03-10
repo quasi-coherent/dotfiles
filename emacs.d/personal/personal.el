@@ -13,6 +13,9 @@
  make-backup-files nil
  whitespace-line-column 100)
 
+;; Less resource intensive on larger projects
+(setq flycheck-idle-change-delay 5)
+
 ;; Turn on line number gutters
 (global-linum-mode t)
 

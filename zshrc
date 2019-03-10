@@ -68,6 +68,7 @@ ZSH_THEME="bureau"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
+    ssh-agent
 )
 
 source $ZSH/oh-my-zsh.sh

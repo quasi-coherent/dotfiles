@@ -7,6 +7,7 @@
         haskell-indentation-common-electric-command
         suspend-frame
         yaml-electric-backspace
+        yaml-electric-dash-and-dot
         ))
 
 (setq mc/cmds-to-run-once
