@@ -4,7 +4,11 @@
 (setq mc/cmds-to-run-for-all
       '(
         crux-move-beginning-of-line
+        easy-kill
+        ensime-mouse-motion
         haskell-indentation-common-electric-command
+        kill-region
+        sp-backward-delete-char
         suspend-frame
         yaml-electric-backspace
         yaml-electric-dash-and-dot
@@ -13,9 +17,11 @@
 (setq mc/cmds-to-run-once
       '(
         ace-window
+        backward-kill-sentence
         beginning-of-buffer
         end-of-buffer
         haskell-indentation-newline-and-indent
         indent-for-tab-command
+        markdown-outdent-or-delete
         xref-pop-marker-stack
         ))

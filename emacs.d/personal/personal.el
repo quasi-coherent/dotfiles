@@ -3,6 +3,7 @@
 (require 'prelude-helm-everywhere)
 (require 'prelude-helm)
 (require 'prelude-haskell)
+(require 'prelude-purescript)
 (require 'prelude-scala)
 (require 'prelude-python)
 (require 'prelude-shell)
