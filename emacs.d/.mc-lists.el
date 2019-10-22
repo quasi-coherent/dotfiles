@@ -8,6 +8,7 @@
         ensime-mouse-motion
         haskell-indentation-common-electric-command
         kill-region
+        purescript-indentation-delete-backward-char
         sp-backward-delete-char
         suspend-frame
         yaml-electric-backspace

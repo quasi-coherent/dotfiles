@@ -72,6 +72,7 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+source <(kubectl completion zsh)
 source $HOME/.zshenv
 # User configuration
 
