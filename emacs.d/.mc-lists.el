@@ -9,6 +9,7 @@
         haskell-indentation-common-electric-command
         kill-region
         purescript-indentation-delete-backward-char
+        sh-assignment
         sp-backward-delete-char
         suspend-frame
         yaml-electric-backspace
@@ -22,7 +23,9 @@
         beginning-of-buffer
         end-of-buffer
         haskell-indentation-newline-and-indent
+        helm-M-x
         indent-for-tab-command
         markdown-outdent-or-delete
+        text-scale-decrease
         xref-pop-marker-stack
         ))

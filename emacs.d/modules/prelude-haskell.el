@@ -41,9 +41,13 @@
     (eldoc-mode +1)
     (haskell-indentation-mode +1)
     (interactive-haskell-mode +1)
-    (intero-mode +1))
+    (dante +1))
 
   (setq prelude-haskell-mode-hook 'prelude-haskell-mode-defaults)
+
+  (add-hook 'dante-mode-hook
+            '(lambda () (flycheck-add-next-checker 'haskell-dante
+                                                   '(warning . haskell-hlint))))
 
   (add-hook 'haskell-mode-hook (lambda ()
                                  (run-hooks 'prelude-haskell-mode-hook))))
