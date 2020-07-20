@@ -5,4 +5,4 @@ export PATH="/bin:/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/usr/local/sbin:JAVA_H
 export ZSH="$HOME/.oh-my-zsh"
 
 # Source Nix user profile
-. $HOME/.nix-profile/etc/profile.d/nix.sh
+if [ -e /Users/ddonohue/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/ddonohue/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
