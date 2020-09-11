@@ -72,8 +72,7 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-source <(kubectl completion zsh)
-source $HOME/.zshenv
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -104,6 +103,8 @@ source $HOME/.zshenv
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias emacs="emacs -nw"
+E() { open -a /Applications/Emacs.app --args "$@" & disown }
+e() { command emacsclient -nq "$@" }
 
 #############
 # Functions #
@@ -130,11 +131,18 @@ extract () {
    fi
 }
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/ddonohue/bin/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ddonohue/bin/google-cloud-sdk/path.zsh.inc'; fi
+# k8s cli autocompletion
+source <(kubectl completion zsh)
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/ddonohue/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ddonohue/bin/google-cloud-sdk/completion.zsh.inc'; fi
+# aws cli autocompletion
+source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
 
 # direnv hooks
-eval "$(direnv hook zsh)"
+if command -v direnv 1>/dev/null 2>&1; then
+   eval "$(direnv hook zsh)"
+fi
+
+# pyenv
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
