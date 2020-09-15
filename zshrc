@@ -132,10 +132,14 @@ extract () {
 }
 
 # k8s cli autocompletion
-source <(kubectl completion zsh)
+if command -v direnv 1>/dev/null 2>&1; then
+   source <(kubectl completion zsh)
+fi
 
 # aws cli autocompletion
-source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
+if [ -f "/usr/local/share/zsh/site-functions/aws_zsh_completer.sh" ]; then
+  source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
+fi
 
 # direnv hooks
 if command -v direnv 1>/dev/null 2>&1; then
