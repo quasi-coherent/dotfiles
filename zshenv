@@ -5,12 +5,13 @@ export ZSH="$HOME/.oh-my-zsh"
 
 typeset -U path
 
-# Inherit PATH from nix when running inside nix shell
+# Mangle PATH when running inside nix shell
 if [ -z "$IN_NIX_SHELL" ] ; then
   path=(
     ~/bin
-    ~/.local/bin
     ~/.cabal/bin
+    ~/.ghcup/bin
+    ~/.local/bin
     ~/.npm/node_modules/bin
     /usr/local/opt/scala@2.11/bin
     /usr/local/sbin
@@ -25,8 +26,6 @@ if [ -z "$IN_NIX_SHELL" ] ; then
 else
   path=($(echo "$PATH" | sed -e 's/:/\n/g'))
 fi
-
-# export PATH="/bin:/sbin:/usr/local/opt/python@3.8/libexec/bin:/usr/local/bin:/usr/bin:/usr/sbin:/usr/local/sbin:/usr/local/opt/scala@2.11/bin:$HOME/.local/bin:$HOME/bin:$HOME/.cabal/bin"
 
 # Source Nix user profile
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi
