@@ -132,7 +132,7 @@ extract () {
 }
 
 # k8s cli autocompletion
-if command -v direnv 1>/dev/null 2>&1; then
+if command -v kubectl 1>/dev/null 2>&1; then
    source <(kubectl completion zsh)
 fi
 
